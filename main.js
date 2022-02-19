@@ -15,7 +15,7 @@ function take_snapshot()
     });
 }
 console.log("ml5 version",ml5.version);
-classifier=ml5.imageClassifier("https://teachablemachine.withgoogle.com/models/j55OxbDmq/modal.json",modalLoaded);
+classifier=ml5.imageClassifier("https://teachablemachine.withgoogle.com/models/j55OxbDmq/model.json",modalLoaded);
 function modalLoaded()
 {
     console.log("modal is loaded");
@@ -24,7 +24,6 @@ function speak()
 {
     var synth=window.speechSynthesis;
     speak_data_1="The first prediction is"+prediction_1;
-    speak_data_2="the second prediction is"+prediction_2;
     var utterThis=new SpeechSynthesisUtterance(speak_data_1+speak_data_2);
     synth.speak(utterThis); 
 }
@@ -45,17 +44,16 @@ function gotResult(error, results)
     {
         console.log(results);
         document.getElementById("result_emotion_name_1").innerHTML=results[0].label;
-        document.getElementById("result_emotion_name_2").innerHTML=results[1].label;
         prediction_1=results[0].label;
-        prediction_2=results[1].label;
+       
         speak();
         if(results[0].label=="yes")
         {
-            document.getElementById("update_emoji_1").innerHTML="&#128077;";
+            document.getElementById("update_emoji_1").innerHTML="👍";
         }
         else if(result[0].label=="no")
         {
-            document.getElementById("update_emoji_1").innerHTML="&#128078;";
+            document.getElementById("update_emoji_1").innerHTML="👎";
         }
     }
 }
